@@ -1,27 +1,52 @@
-import React, { PureComponent } from 'react';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
-import { observer, inject } from 'mobx-react';
-import Loadable from 'react-loadable';
+import React, { PureComponent, Suspense, lazy } from 'react';
+import { HashRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import './index.less';
 
-const Loading = () => <div>Loading...</div>;
+const TestCom = lazy(() => import('@pages/test-com'));
+const About = lazy(() => import('@pages/about-com'));
+const List = lazy(() => import('@pages/list-com'));
+const StickyCom = lazy(() => import('@pages/sticky-com'));
 
-const TestCom = Loadable({
-    loader: () => import('@components/test-com'),
-    loading: Loading,
-});
+const AnimationMap = {
+  'PUSH': 'forward',
+  'POP': 'back'
+};
 
-@observer
+const RoutesComponent = withRouter(({location, history}) => (
+  <TransitionGroup 
+    className={'router-wrapper'}
+    childFactory={child => React.cloneElement(
+      child,
+      {classNames: AnimationMap[history.action]}
+    )}>
+    <CSSTransition
+      timeout={500}
+      classNames={'fade'}
+      key={location.pathname}    
+    >
+      <Switch location={location}>
+          <Route exact path='/' component={TestCom} />
+          <Route exact path='/test' component={TestCom} />
+          <Route exact path='/about' component={About} />
+          <Route exact path='/list' component={List} />
+          <Route exact path='/sticky' component={StickyCom} />
+      </Switch>
+    </CSSTransition>
+  </TransitionGroup>
+));
+
 class Routes extends PureComponent {
   constructor(props) {
     super(props);
+    this.state = {};
   }
   render() {
     return (
       <Router>
-        <Switch>
-            <Route path='/' component={TestCom} />
-            <Route path='/test' component={TestCom} />
-        </Switch>
+        <Suspense fallback={<div>loading...</div>}>
+          <RoutesComponent />
+        </Suspense>
     </Router>
     )
   }

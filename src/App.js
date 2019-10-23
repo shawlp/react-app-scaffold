@@ -1,18 +1,17 @@
-import React, { Suspense, lazy } from 'react';
-import { hot } from 'react-hot-loader';
+import React from 'react';
 import './App.less';
-import { Button } from 'antd-mobile';
+import Routes from '@routes';
+import axiosConfig from '@common/axiosConfig';
 
-const Routes = lazy(() => import('@routes/index'));
+// 拦截request,设置全局请求为ajax
+axiosConfig();
 
 function App() {
   return (
     <div className="App">
-      <Suspense fallback={<div>loading...</div>}>
         <Routes />
-      </Suspense>
     </div>
   );
 }
 
-export default hot(module)(App);
+export default App;   

@@ -20,4 +20,10 @@ export default class TestStore {
       }
     ];
   }
+
+  @action getData = () => {
+    api.getData().then(res => {
+      console.log('getData', res);
+    })
+  }
 }

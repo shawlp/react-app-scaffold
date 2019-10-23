@@ -1,17 +1,31 @@
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'mobx-react';
 import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'mobx-react';
 import rootStore from '@store';
 import App from './App';
 import '@assets/index.css';
 
-ReactDOM.render(
-  <Provider {...rootStore}>
-      <App />
-  </Provider>, 
-  document.getElementById('root')
-);
+function render() {
+  ReactDOM.render(
+    <AppContainer>
+      <Provider {...rootStore}>
+          <App />
+      </Provider>
+    </AppContainer>, 
+    document.getElementById('root')
+  );
+}
+
+render();
+
+if (module.hot) {
+  module.hot.accept(() => {
+      render()
+  })  
+}   
+
 
 
 
