@@ -22,15 +22,8 @@ module.exports = override(
     noIeCompat: true,
     localIdentName: "[local]--[hash:base64:5]" // if you use CSS Modules, and custom `localIdentName`, default is '[local]--[hash:base64:5]'.
   }),
-  addPostcssPlugins([require("postcss-px2rem")({ rootValue: 100, propList: ['*'] })]),
+  addPostcssPlugins([require("postcss-pxtorem")({ rootValue: 100, propList: ['*'] })]),
   rewireAliases.aliasesOptions({
-    '@api': path.resolve(__dirname, `${paths.appSrc}/api/`),
-    '@components': path.resolve(__dirname, `${paths.appSrc}/components/`),
-    '@assets': path.resolve(__dirname, `${paths.appSrc}/assets/`),
-    '@routes': path.resolve(__dirname, `${paths.appSrc}/routes/`),
-    '@store': path.resolve(__dirname, `${paths.appSrc}/store/`),
-    '@utils': path.resolve(__dirname, `${paths.appSrc}/utils/`),
-    '@pages': path.resolve(__dirname, `${paths.appSrc}/pages/`),
-    '@common': path.resolve(__dirname, `${paths.appSrc}/common/`)
+    '@': path.resolve(__dirname, `${paths.appSrc}`)
   })
 );

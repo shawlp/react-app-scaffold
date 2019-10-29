@@ -1,12 +1,14 @@
 import React, { PureComponent, Suspense, lazy } from 'react';
-import { HashRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, withRouter, Redirect } from 'react-router-dom';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
+import Toast from '@/components/Toast';
 import './index.less';
 
-const TestCom = lazy(() => import('@pages/test-com'));
-const About = lazy(() => import('@pages/about-com'));
-const List = lazy(() => import('@pages/list-com'));
-const StickyCom = lazy(() => import('@pages/sticky-com'));
+const MallPage = lazy(() => import('@/pages/mall-page'));
+const GoodsDetail = lazy(() => import('@/pages/goods-detail'));
+const ExchangePoint = lazy(() => import('@/pages/exchange-point'));
+const SubmitOrder = lazy(() => import('@/pages/submit-order'));
+const OrderResult = lazy(() => import('@/pages/order-result'));
 
 const AnimationMap = {
   'PUSH': 'forward',
@@ -26,11 +28,12 @@ const RoutesComponent = withRouter(({location, history}) => (
       key={location.pathname}    
     >
       <Switch location={location}>
-          <Route exact path='/' component={TestCom} />
-          <Route exact path='/test' component={TestCom} />
-          <Route exact path='/about' component={About} />
-          <Route exact path='/list' component={List} />
-          <Route exact path='/sticky' component={StickyCom} />
+          <Route exact path='/mall' component={MallPage} />
+          <Route exact path='/detail' component={GoodsDetail} />
+          <Route exact path='/exchange' component={ExchangePoint} />
+          <Route exact path='/submit' component={SubmitOrder} />
+          <Route exact path='/result' component={OrderResult} />
+          <Redirect exact from="" to="/mall" />
       </Switch>
     </CSSTransition>
   </TransitionGroup>
@@ -44,7 +47,7 @@ class Routes extends PureComponent {
   render() {
     return (
       <Router>
-        <Suspense fallback={<div>loading...</div>}>
+        <Suspense fallback={<Toast />}>
           <RoutesComponent />
         </Suspense>
     </Router>

@@ -1,11 +1,12 @@
-import 'babel-polyfill';
+// import 'core-js/stable';
+// import 'regenerator-runtime/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'mobx-react';
-import rootStore from '@store';
+import rootStore from '@/store';
 import App from './App';
-import '@assets/index.css';
+import '@/assets/index.css';
 
 function render() {
   ReactDOM.render(
@@ -22,7 +23,7 @@ render();
 
 if (module.hot) {
   module.hot.accept(() => {
-      render()
+      render();
   })  
 }   
 

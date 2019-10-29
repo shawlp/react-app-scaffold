@@ -3,8 +3,7 @@ body,
 #root {
     width: 100%;
     height: 100%;
-    background-color: rgb(51,51,51);
-    -webkit-overflow-scrolling: touch;
+    background:rgba(255,255,255,1);
     position: realtive;
 }
 

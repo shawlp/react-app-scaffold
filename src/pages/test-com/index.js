@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react';
 import { observer, inject } from 'mobx-react';
 import './index.less';
-import {listenScroll} from '@utils';
+import {listenScroll} from '@/utils';
 import { Button } from 'antd-mobile';
 
 // const utils = require('@utils');

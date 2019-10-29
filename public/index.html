@@ -29,15 +29,14 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
+    <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js" async="async"></script>
+    <!--根据浏览器动态返回polyfill-->
+    <script src="https://cdn.polyfill.io/v3/polyfill.min.js" async="async"></script>
     <script>
       if ('addEventListener' in document) {
         document.addEventListener('DOMContentLoaded', function() {
           FastClick.attach(document.body);
         }, false);
-      }
-      if(!window.Promise) {
-        document.writeln('<script src="https://as.alipayobjects.com/g/component/es6-promise/3.2.2/es6-promise.min.js"'+'>'+'<'+'/'+'script>');
       }
       (function (doc, win) {
         var docEl = doc.documentElement,
