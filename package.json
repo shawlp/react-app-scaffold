@@ -11,7 +11,7 @@
     "dayjs": "^1.8.16",
     "intersection-observer": "^0.7.0",
     "less": "^3.10.3",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "mobx": "^5.14.0",
     "mobx-react": "^6.1.4",
     "react": "^16.10.2",
